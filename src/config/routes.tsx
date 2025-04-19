@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import WalletIcon from '../components/icons/WalletIcon';
-import DefiIcon from '../components/icons/DefiIcon';
+import { Wallet as WalletIcon, AccountBalance as DefiIcon } from '@mui/icons-material';
 
 export interface RouteConfig {
   path: string;

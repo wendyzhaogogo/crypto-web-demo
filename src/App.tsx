@@ -11,7 +11,7 @@ import DeFi from "./pages/DeFi";
 function App() {
   return (
     <Router>
-      <div className="h-screen bg-gray-100 pb-16 flex flex-col w-screen">
+      <div className="h-screen bg-[#0B1F36] pb-16 flex flex-col w-screen">
         <Routes>
           <Route path="/" element={<Navigate to="/wallet" replace />} />
           <Route path="/wallet" element={<Wallet />} />
