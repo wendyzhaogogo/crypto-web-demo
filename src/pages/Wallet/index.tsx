@@ -1,59 +1,32 @@
-import { ReactNode, useCallback, useState } from "react";
-import { CurrencyBitcoin, Send, Download } from "@mui/icons-material";
+import { useCallback, useState } from "react";
+import { Send, Download } from "@mui/icons-material";
 import { WalletButton } from "./WalletButton";
+import { CryptoAssetItem } from "./CryptoAssetItem";
 
-interface CryptoAsset {
+interface Asset {
   id: string;
-  name: string;
-  symbol: string;
   balance: string;
   value: number;
-  Icon: () => ReactNode;
 }
 
 export default function Wallet() {
   const [totalBalance] = useState(36.68);
 
-  const assets: CryptoAsset[] = [
+  const assets: Asset[] = [
     {
-      id: "bat",
-      name: "Basic Attention Token",
-      symbol: "BAT",
-      balance: "1",
-      value: 1,
-      Icon: () => <CurrencyBitcoin />,
-    },
-    {
-      id: "eth",
-      name: "Ethereum",
-      symbol: "ETH",
-      balance: "1",
-      value: 1,
-      Icon: () => <CurrencyBitcoin />,
-    },
-    {
-      id: "usdt",
-      name: "Tether",
-      symbol: "USDT",
-      balance: "1",
-      value: 1,
-      Icon: () => <CurrencyBitcoin />,
-    },
-    {
-      id: "btc",
-      name: "Bitcoin",
-      symbol: "BTC",
+      id: "BTC",
       balance: "0",
       value: 0,
-      Icon: () => <CurrencyBitcoin />,
     },
     {
-      id: "cro",
-      name: "Crypto.com Coin",
-      symbol: "CRO",
+      id: "ETH",
+      balance: "1",
+      value: 1,
+    },
+    {
+      id: "CRO",
       balance: "0",
       value: 0,
-      Icon: () => <CurrencyBitcoin />,
     },
   ];
 
@@ -100,25 +73,12 @@ export default function Wallet() {
       {/* Asset list */}
       <div className="flex-1 bg-white rounded-t-3xl p-4">
         {assets.map((asset) => (
-          <div
+          <CryptoAssetItem
             key={asset.id}
-            className="flex items-center justify-between p-4 border-b"
-          >
-            <div className="flex items-center">
-              <div className="w-10 h-10 mr-3 flex items-center justify-center">
-                <asset.Icon />
-              </div>
-              <div>
-                <div className="font-medium text-lg">{asset.name}</div>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="font-medium">
-                {asset.balance} {asset.symbol}
-              </div>
-              <div className="text-gray-500">${asset.value.toFixed(2)}</div>
-            </div>
-          </div>
+            coinId={asset.id}
+            balance={asset.balance}
+            value={asset.value}
+          />
         ))}
       </div>
     </div>
