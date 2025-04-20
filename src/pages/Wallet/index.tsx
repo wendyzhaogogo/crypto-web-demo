@@ -2,33 +2,13 @@ import { useCallback, useState } from "react";
 import { Send, Download } from "@mui/icons-material";
 import { WalletButton } from "./WalletButton";
 import { CryptoAssetItem } from "./CryptoAssetItem";
-
-interface Asset {
-  id: string;
-  balance: string;
-  value: number;
-}
+import { useWalletProvider } from "../../components/WalletContext";
 
 export default function Wallet() {
   const [totalBalance] = useState(36.68);
+  const { showCoins } = useWalletProvider();
 
-  const assets: Asset[] = [
-    {
-      id: "BTC",
-      balance: "0",
-      value: 0,
-    },
-    {
-      id: "ETH",
-      balance: "1",
-      value: 1,
-    },
-    {
-      id: "CRO",
-      balance: "0",
-      value: 0,
-    },
-  ];
+  const assets = showCoins;
 
   const handleSend = useCallback(() => {
     console.log("send");
@@ -76,8 +56,8 @@ export default function Wallet() {
           <CryptoAssetItem
             key={asset.id}
             coinId={asset.id}
-            balance={asset.balance}
-            value={asset.value}
+            balance={"0"}
+            value={0}
           />
         ))}
       </div>
