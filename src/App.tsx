@@ -7,7 +7,11 @@ import {
 import Navbar from "./components/Navbar";
 import Wallet from "./pages/Wallet";
 import DeFi from "./pages/DeFi";
-import { CoinAsset, WalletProvider } from "./components/WalletContext";
+import {
+  CoinAsset,
+  CurrencyAsset,
+  WalletProvider,
+} from "./components/WalletContext";
 import { useState } from "react";
 
 function App() {
@@ -22,8 +26,12 @@ function App() {
       id: "CRO",
     },
   ]);
+  const [currency] = useState<CurrencyAsset>({
+    id: "USD",
+    symbol: "$",
+  });
   return (
-    <WalletProvider showCoins={userRelatedCoins}>
+    <WalletProvider showCoins={userRelatedCoins} currency={currency}>
       <Router>
         <div className="h-screen bg-[#0B1F36] pb-16 flex flex-col w-screen">
           <Routes>

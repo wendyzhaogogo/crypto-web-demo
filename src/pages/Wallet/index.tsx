@@ -1,14 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Send, Download } from "@mui/icons-material";
 import { WalletButton } from "./WalletButton";
 import { CryptoAssetItem } from "./CryptoAssetItem";
+import { useGetWalletAssets } from "../../hooks";
 import { useWalletProvider } from "../../components/WalletContext";
 
 export default function Wallet() {
-  const [totalBalance] = useState(36.68);
-  const { showCoins } = useWalletProvider();
-
-  const assets = showCoins;
+  const { currency } = useWalletProvider();
+  const { assets, totalCurrencyAmount } = useGetWalletAssets();
 
   const handleSend = useCallback(() => {
     console.log("send");
@@ -27,12 +26,14 @@ export default function Wallet() {
 
       {/* Balance display */}
       <div className="text-center mb-8 mt-4 flex items-center justify-center gap-2">
-        <div className="text-gray-400 text-lg flex items-center">$</div>
+        <div className="text-gray-400 text-lg flex items-center">
+          {currency.symbol}
+        </div>
         <div className="text-4xl font-bold flex items-center text-white">
-          {totalBalance.toFixed(2)}
+          {totalCurrencyAmount.toFixed(2)}
         </div>
         <div className="text-lg font-bold flex items-center text-gray-400">
-          USD
+          {currency.id}
         </div>
       </div>
 
@@ -54,10 +55,10 @@ export default function Wallet() {
       <div className="flex-1 bg-white rounded-t-3xl p-4">
         {assets.map((asset) => (
           <CryptoAssetItem
-            key={asset.id}
-            coinId={asset.id}
-            balance={"0"}
-            value={0}
+            key={asset.coinId}
+            coinId={asset.coinId}
+            balance={asset.balance}
+            value={asset.currencyAmount}
           />
         ))}
       </div>

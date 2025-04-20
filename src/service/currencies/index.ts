@@ -26,12 +26,12 @@ export interface Currency {
   num_confirmation_required: number;
 }
 
-export const getCurrencyByCoinId = (coinId: string): Currency | undefined => {
+export const getCoinByCoinId = (coinId: string): Currency | undefined => {
   return currenciesMockData.currencies.find(
     (currency) => currency.coin_id.toLowerCase() === coinId.toLowerCase()
   );
 };
 
-export const useGetCurrencyByCoinId = (coinId: string) => {
-  return useMemo(() => getCurrencyByCoinId(coinId), [coinId]);
+export const useGetCoinByCoinId = (coinId: string) => {
+  return useMemo(() => getCoinByCoinId(coinId), [coinId]);
 };

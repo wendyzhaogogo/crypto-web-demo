@@ -1,6 +1,7 @@
-import { useGetCurrencyByCoinId } from "../../service/currencies";
+import { useGetCoinByCoinId } from "../../service/currencies";
 import { CurrencyBitcoin } from "@mui/icons-material";
 import { useState } from "react";
+import { useWalletProvider } from "../../components/WalletContext";
 
 interface CryptoAssetItemProps {
   coinId: string;
@@ -8,11 +9,15 @@ interface CryptoAssetItemProps {
   value: number;
 }
 
-export function CryptoAssetItem({ coinId, balance, value }: CryptoAssetItemProps) {
-  const currency = useGetCurrencyByCoinId(coinId);
+export function CryptoAssetItem({
+  coinId,
+  balance,
+  value,
+}: CryptoAssetItemProps) {
+  const coin = useGetCoinByCoinId(coinId);
   const [imageError, setImageError] = useState(false);
-
-  if (!currency) {
+  const { currency } = useWalletProvider();
+  if (!coin) {
     return null;
   }
 
@@ -24,23 +29,26 @@ export function CryptoAssetItem({ coinId, balance, value }: CryptoAssetItemProps
             <CurrencyBitcoin style={{ fontSize: 32, color: "#666" }} />
           ) : (
             <img
-              src={currency.colorful_image_url}
-              alt={currency.name}
+              src={coin.colorful_image_url}
+              alt={coin.name}
               className="w-8 h-8"
               onError={() => setImageError(true)}
             />
           )}
         </div>
         <div>
-          <div className="font-medium text-lg">{currency.name}</div>
+          <div className="font-medium text-lg">{coin.name}</div>
         </div>
       </div>
       <div className="text-right">
         <div className="font-medium">
-          {balance} {currency.symbol}
+          {balance} {coin.symbol}
         </div>
-        <div className="text-gray-500">${value.toFixed(2)}</div>
+        <div className="text-gray-500">
+          {currency.symbol}
+          {value.toFixed(2)}
+        </div>
       </div>
     </div>
   );
-} 
+}
