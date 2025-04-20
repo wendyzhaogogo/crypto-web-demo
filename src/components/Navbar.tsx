@@ -5,7 +5,7 @@ export default function Navbar() {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white h-16 box-border border-t border-gray-200">
       <div className="flex justify-around">
         {routes.map((route) => (
           <Link

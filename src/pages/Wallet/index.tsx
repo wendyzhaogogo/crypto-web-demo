@@ -68,17 +68,19 @@ export default function Wallet() {
   return (
     <div className="flex flex-col h-full bg-[#0B1F36]">
       {/* Header */}
-      <div className="flex justify-between items-center p-4">
-        <div className="text-xl font-medium">crypto.com | DeFi Wallet</div>
+      <div className="mt-4 flex items-center justify-center text-xl  p-4 gap-1">
+        <span className="text-white flex items-center">crypto.com</span>
       </div>
 
       {/* Balance display */}
       <div className="text-center mb-8 mt-4 flex items-center justify-center gap-2">
         <div className="text-gray-400 text-lg flex items-center">$</div>
-        <div className="text-4xl font-bold flex items-center">
+        <div className="text-4xl font-bold flex items-center text-white">
           {totalBalance.toFixed(2)}
         </div>
-        <div className="text-lg font-bold flex items-center">USD</div>
+        <div className="text-lg font-bold flex items-center text-gray-400">
+          USD
+        </div>
       </div>
 
       {/* Action buttons */}
